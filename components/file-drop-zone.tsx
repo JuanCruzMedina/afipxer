@@ -8,9 +8,9 @@ import { Alert } from "@heroui/alert";
 import { Textarea } from "@heroui/input";
 
 import { ClipBoardIcon, DownloadIcon } from "@/components/icons";
+import { convertSalesToCSV, parseSalesFile } from "@/helpers/importer";
 
-interface FileDropZoneProps {
-}
+interface FileDropZoneProps {}
 
 export default function FileDropZone({}: FileDropZoneProps) {
   const [text, setText] = useState<string>("");
@@ -31,8 +31,12 @@ export default function FileDropZone({}: FileDropZoneProps) {
           if (event.target?.result) {
             const content = event.target.result as string;
 
-            setText(content);
-            setNormalizedText(normalizeText(content));
+            setText(text);
+            const sales = parseSalesFile(content);
+            const normalizedContent = convertSalesToCSV(sales);
+
+            setText(normalizedContent);
+            setNormalizedText(normalizedContent);
           }
           setLoading(false);
         };
@@ -45,14 +49,8 @@ export default function FileDropZone({}: FileDropZoneProps) {
       setLoading(false);
     }
   }, []);
-
-  const normalizeText = (input: string): string => {
-    return input.trim().replace(/\s+/g, " ").toLowerCase();
-  };
-
   const copyToClipboard = () => {
     navigator.clipboard.writeText(normalizedText);
-    alert("Texto copiado al portapapeles");
   };
 
   const downloadFile = () => {
@@ -66,7 +64,7 @@ export default function FileDropZone({}: FileDropZoneProps) {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: { "text/plain": [".txt"] }
+    accept: { "text/plain": [".txt"] },
   });
 
   return (
