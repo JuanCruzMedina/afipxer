@@ -8,7 +8,7 @@ import { Alert } from "@heroui/alert";
 import { Textarea } from "@heroui/input";
 
 import { ClipBoardIcon, DownloadIcon } from "@/components/icons";
-import { convertSalesToCSV, parseSalesFile } from "@/helpers/importer";
+import { convertSalesToCSV, parseSalesFile } from "@/helpers/salesParser";
 
 interface FileDropZoneProps {}
 
@@ -31,7 +31,7 @@ export default function FileDropZone({}: FileDropZoneProps) {
           if (event.target?.result) {
             const content = event.target.result as string;
 
-            setText(text);
+            setText(content);
             const sales = parseSalesFile(content);
             const normalizedContent = convertSalesToCSV(sales);
 
@@ -49,6 +49,7 @@ export default function FileDropZone({}: FileDropZoneProps) {
       setLoading(false);
     }
   }, []);
+
   const copyToClipboard = () => {
     navigator.clipboard.writeText(normalizedText);
   };
@@ -58,7 +59,7 @@ export default function FileDropZone({}: FileDropZoneProps) {
     const a = document.createElement("a");
 
     a.href = URL.createObjectURL(blob);
-    a.download = "afipxer.txt";
+    a.download = "afipxer.csv";
     a.click();
   };
 
@@ -74,12 +75,14 @@ export default function FileDropZone({}: FileDropZoneProps) {
         className="w-full p-6 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-blue-500"
       >
         <input {...getInputProps()} />
-        <p className="text-center text-gray-600">
+        <p className="text-center text-default-500">
           Arrastra y suelta un archivo de texto aquí o haz clic para seleccionar
           uno
         </p>
       </div>
-      {loading && <CircularProgress className="mt-4" />}
+      {loading && (
+        <CircularProgress aria-label="Loading ..." className="mt-4" size="lg" />
+      )}
       {error && (
         <div className="w-full flex items-center my-3">
           <Alert color="danger" title={error} />
