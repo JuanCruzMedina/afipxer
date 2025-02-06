@@ -1,6 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import { usePostHog } from "posthog-js/react";
+
+import { siteConfig } from "@/config/site";
 
 export default function Error({
   error,
@@ -9,22 +12,25 @@ export default function Error({
   error: Error;
   reset: () => void;
 }) {
+  const posthog = usePostHog();
+
   useEffect(() => {
-    // Log the error to an error reporting service
-    /* eslint-disable no-console */
-    console.error(error);
-  }, [error]);
+    posthog?.capture(siteConfig.posthog.errorEventName, {
+      message: error.message,
+    });
+  }, [error, posthog]);
 
   return (
-    <div>
-      <h2>Something went wrong!</h2>
+    <div className="flex flex-col items-center justify-center h-screen p-6">
+      <h2 className="text-2xl font-semibold text-danger-500">
+        Oops! Algo salió mal.
+      </h2>
+      <p className="text-default-600 mt-1">Por favor, intenta nuevamente.</p>
       <button
-        onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
-        }
+        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
+        onClick={() => reset()}
       >
-        Try again
+        Reintentar
       </button>
     </div>
   );

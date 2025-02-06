@@ -7,4 +7,7 @@ export const siteConfig = {
     github: "https://github.com/JuanCruzMedina/afipxer",
     sponsor: "https://juanmedina.com.ar",
   },
+  posthog: {
+    errorEventName: "afipxer-error",
+  },
 };
