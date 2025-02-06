@@ -35,6 +35,7 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning lang="en">
       <head />
+      <meta content="text/html; charset=utf-8" httpEquiv="content-type" />
       <body
         className={clsx(
           "min-h-screen bg-background font-sans antialiased",
@@ -47,16 +48,48 @@ export default function RootLayout({
             <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
               {children}
             </main>
-            <footer className="w-full flex items-center justify-center py-3">
-              <Link
-                isExternal
-                className="flex items-center gap-1 text-current"
-                href="https://heroui.com?utm_source=next-app-template"
-                title="heroui.com homepage"
-              >
-                <span className="text-default-600">Powered by</span>
-                <p className="text-primary">HeroUI</p>
-              </Link>
+            <footer className="w-full flex flex-col items-center justify-center py-3">
+              <span className="text-default-600">
+                Developed and designed by{" "}
+                <Link
+                  isExternal
+                  className="text-current"
+                  href="https://juanmedina.com.ar/"
+                  title="juanmedina.com.ar homepage"
+                >
+                  <p className="text-primary">Juan Cruz Medina</p>
+                </Link>
+              </span>
+              <span className="text-default-600">
+                Build with{" "}
+                <Link
+                  isExternal
+                  className="text-current"
+                  href="https://heroui.com/"
+                  title="heroui.com homepage"
+                >
+                  <p className="text-primary">HeroUI</p>
+                </Link>{" "}
+                &{" "}
+                <Link
+                  isExternal
+                  className="text-current"
+                  href="https://nextjs.org/"
+                  title="nextjs.com homepage"
+                >
+                  <p className="text-primary">Vercel</p>
+                </Link>
+                . Hosted on{" "}
+                <Link
+                  isExternal
+                  className="text-current"
+                  href="https://vercel.com/"
+                  title="vercel.com homepage"
+                >
+                  <p className="text-primary">Vercel</p>
+                </Link>
+                .
+              </span>
             </footer>
           </div>
         </Providers>
