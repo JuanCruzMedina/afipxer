@@ -1,10 +1,10 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Next.js + HeroUI",
-  description: "Make beautiful websites regardless of your design experience.",
+  name: "Afipxer",
+  description: "Convierte tus archivos de ventas de AFIP a CSV en segundos",
   links: {
-    github: "https://github.com/heroui-inc/heroui", //TODO: update repo
+    github: "https://github.com/JuanCruzMedina", //TODO: update repo
     sponsor: "https://juanmedina.com.ar",
   },
 };
