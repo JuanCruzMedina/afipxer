@@ -4,7 +4,7 @@ export const siteConfig = {
   name: "Afipxer",
   description: "Convierte tus archivos de ventas de AFIP a CSV en segundos",
   links: {
-    github: "https://github.com/JuanCruzMedina", //TODO: update repo
+    github: "https://github.com/JuanCruzMedina/afipxer",
     sponsor: "https://juanmedina.com.ar",
   },
 };
