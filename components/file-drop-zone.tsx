@@ -17,6 +17,7 @@ export default function FileDropZone({}: FileDropZoneProps) {
   const [normalizedText, setNormalizedText] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [fileName, setFileName] = useState<string>("output.csv");
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     setError(null);
@@ -25,6 +26,8 @@ export default function FileDropZone({}: FileDropZoneProps) {
       const file = acceptedFiles[0];
 
       if (file) {
+        setFileName(file.name.replace(/\.txt$/, ".csv"));
+
         const reader = new FileReader();
 
         reader.onload = (event: ProgressEvent<FileReader>) => {
@@ -56,11 +59,11 @@ export default function FileDropZone({}: FileDropZoneProps) {
 
   const downloadFile = () => {
     const blob = new Blob([normalizedText], { type: "text/plain" });
-    const a = document.createElement("a");
+    const fileDownloadLink = document.createElement("a");
 
-    a.href = URL.createObjectURL(blob);
-    a.download = "afipxer.csv";
-    a.click();
+    fileDownloadLink.href = URL.createObjectURL(blob);
+    fileDownloadLink.download = fileName;
+    fileDownloadLink.click();
   };
 
   const { getRootProps, getInputProps } = useDropzone({
