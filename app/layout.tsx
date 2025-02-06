@@ -57,7 +57,7 @@ export default function RootLayout({
                   href="https://juanmedina.com.ar/"
                   title="juanmedina.com.ar homepage"
                 >
-                  <p className="text-primary">Juan Cruz Medina</p>
+                  <p className="text-primary">Juan Cruz Medina</p>.
                 </Link>
               </span>
               <span className="text-default-600">
@@ -68,7 +68,7 @@ export default function RootLayout({
                   href="https://heroui.com/"
                   title="heroui.com homepage"
                 >
-                  <p className="text-primary">HeroUI</p>
+                  <p className="text-primary">Hero UI</p>
                 </Link>{" "}
                 &{" "}
                 <Link
@@ -77,7 +77,7 @@ export default function RootLayout({
                   href="https://nextjs.org/"
                   title="nextjs.com homepage"
                 >
-                  <p className="text-primary">Vercel</p>
+                  <p className="text-primary">Next.js</p>
                 </Link>
                 . Hosted on{" "}
                 <Link
